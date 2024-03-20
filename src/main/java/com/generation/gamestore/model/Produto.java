@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_produto")
+@Table(name = "tb_produtos")
 public class Produto {
 
 	@Id
@@ -24,7 +24,7 @@ public class Produto {
 	private Long id;
 
 	@NotBlank(message = "O atributo nome é Obrigatório!")
-	@Size(min = 5, max = 50, message = "O atributo titulo deve conter no minimo 05 e no maximo 100 caracteres")
+	@Size(min = 5, max = 50, message = "O atributo titulo deve conter no minimo 05 e no maximo 50 caracteres")
 	private String nome;
 
 	@NotBlank(message = "0 atributo gênero é Obrigatório!")
@@ -32,7 +32,7 @@ public class Produto {
 	private String genero;
 
 	@NotBlank(message = "0 atributo descricao é Obrigatório!")
-	@Size(min = 10, max = 150, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
+	@Size(min = 10, max = 150, message = "O atributo texto deve conter no mínimo 10 e no máximo 150 caracteres")
 	private String descricao;
 
 	@DecimalMin(value = "1.00", message = "O preço mínimo deve ser 1.00")
@@ -42,6 +42,10 @@ public class Produto {
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -90,5 +94,14 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 
 }
